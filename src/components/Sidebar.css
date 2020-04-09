@@ -1,0 +1,32 @@
+#sidebar-container{
+   margin-top: 20px;
+   margin-right: 2%;
+   min-width: 20%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+h2{
+   text-align: center;
+}
+
+#card-container{
+   display: flex;
+   flex-direction: row;
+}
+
+#card-container>.image>img{
+   max-width: 135px;
+}
+
+#header-container{
+   background-color: black;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+#header-container>div{
+   color: white
+}

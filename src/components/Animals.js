@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-
+import Sidebar from './Sidebar'
+import './Animals.css'
 
 const animals = [
    {
@@ -86,13 +87,82 @@ const animals = [
       description: 'Sierra is looking for experienced nanny',
       animalId: 'wolf4'
    },
-
 ]
 
 export default class Animals extends Component {
+   constructor(){
+      super()
+      this.state={
+         animals,
+         likes: [],
+         dislikes: []
+      }
+   }
+
+   likeFunc = (animalId) => {
+      const likedAnimal = this.state.animals.filter(animal=> animal.animalId === animalId)[0]
+      const likes = [...this.state.likes]
+      if(!likes.includes(likedAnimal)){
+         if(!this.state.dislikes.includes(likedAnimal)){
+            likes.push(likedAnimal)
+         }
+      }
+      this.setState({likes})
+   }
+
+   dislikeFunc = (animalId) => {
+      const dislikedAnimal = this.state.animals.filter(animal=> animal.animalId === animalId)[0]
+      const dislikes = [...this.state.dislikes]
+      if(!dislikes.includes(dislikedAnimal)){
+         if(!this.state.likes.includes(dislikedAnimal)){
+         dislikes.push(dislikedAnimal)
+         }
+      }
+      this.setState({dislikes})
+   }
+
+   discardFunc = (animalId) => {
+      const animals = this.state.animals.filter(animal=> animal.animalId !== animalId)
+      const likes = this.state.likes.filter(animal=> animal.animalId !== animalId)
+      const dislikes = this.state.dislikes.filter(animal=> animal.animalId !== animalId)
+      this.setState({animals, likes, dislikes})
+   }
+   
+
    render() {
       return (
-         <div>
+         <div id='main-container'>
+            <div id='parent-container'>
+               <div>
+                  <h1 id='title'>Animal Lover</h1>
+                  <div id='animals-container'>
+                     {this.state.animals.map(({image, type, name, description, animalId})=>{
+                        return (
+                           <div key={animalId} className="ui card">
+                              <div className="image">
+                                 <img src={`/images/${image}`} className='card-image' alt='...'/>
+                              </div>
+                              <div className="content">
+                                 <div className="header">{name}</div>
+                                 <div className="meta">
+                                    <span className="date">{type}</span>
+                                 </div>
+                                 <div className="description">
+                                    {description}
+                                 </div>
+                              </div>
+                              <div className="extra content">
+                                    <button onClick={() => this.likeFunc(animalId)} className="ui blue button">Like</button>
+                                    <button onClick={() => this.dislikeFunc(animalId)} className="ui red button">Dislike</button>
+                                    <button onClick={() => this.discardFunc(animalId)} className="ui grey button">Discard</button>
+                              </div>
+                           </div>
+                        )
+                     })}
+                  </div>
+               </div>
+            </div>
+            <Sidebar liked={this.state.likes} disliked={this.state.dislikes}/>
          </div>
       )
    }

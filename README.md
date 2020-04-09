@@ -1,5 +1,5 @@
 ANIMAL LOVER APP
-CLASSWORK: 
+CLASSWORK:
 *2 commits MUST be made
 *1st commit is the scaffolding with images placed, array created and create-react app prepared with correct components
 *2nd commit 3:30pm work done to that point.
