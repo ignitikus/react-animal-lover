@@ -98,7 +98,12 @@ export default class Animals extends Component {
          dislikes: []
       }
    }
-
+   deleteFromSide = (id) => {
+      const likes = this.state.likes.filter(animal=>animal.animalId !== id)
+      const dislikes = this.state.dislikes.filter(animal=>animal.animalId !== id)
+      this.setState({likes, dislikes})
+   }
+   
    likeFunc = (animalId) => {
       const likedAnimal = this.state.animals.filter(animal=> animal.animalId === animalId)[0]
       const likes = [...this.state.likes]
@@ -162,7 +167,7 @@ export default class Animals extends Component {
                   </div>
                </div>
             </div>
-            <Sidebar liked={this.state.likes} disliked={this.state.dislikes}/>
+            <Sidebar liked={this.state.likes} disliked={this.state.dislikes} deleteFromSide={this.deleteFromSide}/>
          </div>
       )
    }
