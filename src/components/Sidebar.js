@@ -5,9 +5,25 @@ export default class Sidebar extends Component {
    render() {
       return (
          <div id='sidebar-container'>
-            <h2 id='likes-h2'>Likes</h2>
+            <div id='likes-container' readOnly>
+               <div className="ui input" style={{width:'30px'}}>
+                        <input 
+                           type="text" 
+                           id='likes-counter'
+                           style={{
+                              padding:0,
+                              margin:0
+                           }}
+                           value={this.props.liked.length} 
+                           readOnly
+                        />
+               </div>
+               <h2 id='likes-h2' style={{
+                  marginBottom:'25px'
+               }}>Likes</h2>
+            </div>
             {this.props.liked.length<1 && 
-               <p>No likes</p>
+               <p> No likes</p>
             }
             {this.props.liked.map(({image, type, name, description, animalId})=>{
                return (
@@ -21,7 +37,23 @@ export default class Sidebar extends Component {
                   </div>
                )
             })}
-            <h2>Dislikes</h2>
+            <div id='likes-container' readOnly>
+               <div className="ui input" style={{width:'30px'}}>
+                        <input 
+                           type="text" 
+                           id='likes-counter'
+                           style={{
+                              padding:0,
+                              margin:0
+                           }}
+                           value={this.props.disliked.length} 
+                           readOnly
+                        />
+               </div>
+               <h2 id='likes-h2' style={{
+                  marginBottom:'25px'
+               }}>Dislikes</h2>
+            </div>
             {this.props.disliked.length<1 && 
                <p>No dislikes</p>
             }

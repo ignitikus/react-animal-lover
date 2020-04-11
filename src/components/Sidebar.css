@@ -11,10 +11,6 @@ h2{
    text-align: center;
 }
 
-#likes-h2{
-   margin-top: 10px;
-}
-
 #card-container{
    display: flex;
    flex-direction: row;
@@ -34,3 +30,18 @@ h2{
 #header-container>div{
    color: white
 }
+
+#likes-container{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   align-content: center;
+}
+
+#likes-counter{
+   text-align: center;
+   border: none;
+   font-size: 1.5em;
+   font-weight: bolder;
+}
+
