@@ -1,87 +1,88 @@
 import React, { Component } from 'react'
 import Sidebar from './Sidebar'
 import './Animals.css'
+import uniqid from 'uniqid'
 
 const animals = [
    {
-      image: 'fox1.jpg',
+      image: '/images/fox1.jpg',
       type: 'Vulpes',
       name: 'Scout',
       description: 'Scout is chilling on a snow bed',
       animalId: 'fox1'
    },
    {
-      image: 'fox2.jpg',
+      image: '/images/fox2.jpg',
       type: 'Vulpes',
       name: 'Autumn',
       description: 'Autumn is ready to snack on your chicken',
       animalId: 'fox2'
    },
    {
-      image: 'fox3.jpg',
+      image: '/images/fox3.jpg',
       type: 'Vulpes',
       name: 'Kit',
       description: 'Kit is not sure if she turned off the stove',
       animalId: 'fox3'
    },
    {
-      image: 'fox4.jpg',
+      image: '/images/fox4.jpg',
       type: 'Vulpes',
       name: 'Arvi',
       description: 'Arvi is small, but determined',
       animalId: 'fox4'
    },
    {
-      image: 'penguin1.jpg',
+      image: '/images/penguin1.jpg',
       type: 'Aptenodytes',
       name: 'Flipperstein',
       description: 'Flipperstein tired of his fame',
       animalId: 'penguin1'
    },
    {
-      image: 'penguin2.jpeg',
+      image: '/images/penguin2.jpeg',
       type: 'Aptenodytes',
       name: 'Flapperson',
       description: 'Flapperson is done with the quarantine',
       animalId: 'penguin2'
    },
    {
-      image: 'penguin3.jpg',
+      image: '/images/penguin3.jpg',
       type: 'Aptenodytes',
       name: 'Fishface group',
       description: 'Fishface group is known for their fishing abilities',
       animalId: 'penguin3'
    },
    {
-      image: 'penguin4.jpg',
+      image: '/images/penguin4.jpg',
       type: 'Aptenodytes',
       name: 'Beakerson',
       description: 'Beakerson is not sure about your fashion sense',
       animalId: 'penguin4'
    },
    {
-      image: 'wolf1.jpg',
+      image: '/images/wolf1.jpg',
       type: 'Canis',
       name: 'Frost',
       description: 'Frost is single and ready to mingle',
       animalId: 'wolf1'
    },
    {
-      image: 'wolf2.jpg',
+      image: '/images/wolf2.jpg',
       type: 'Canis',
       name: 'Stalker',
       description: 'Stalker is looking for his keys',
       animalId: 'wolf2'
    },
    {
-      image: 'wolf3.jpg',
+      image: '/images/wolf3.jpg',
       type: 'Canis',
       name: 'Fang',
       description: '"Maybe you shouldn\'t smile, Fang"',
       animalId: 'wolf3'
    },
    {
-      image: 'wolf4.jpg',
+      image: '/images/wolf4.jpg',
       type: 'Canis',
       name: 'Sierra',
       description: 'Sierra is looking for experienced nanny',
@@ -97,7 +98,14 @@ export default class Animals extends Component {
          animals,
          likes: [],
          dislikes: [],
-         search:''
+         search:'',
+         newAnimal:{
+            image:'',
+            name:'',
+            type:'',
+            description:'',
+            animalId:'',
+         }
       }
    }
    deleteFromSide = (id) => {
@@ -138,6 +146,24 @@ export default class Animals extends Component {
    searchBar = (event) => {
       this.setState({search: event.target.value.trim()})
    }
+
+   addAnimal = (event) => {
+      event.preventDefault()
+      const resetNewAnimal = { image:'', name:'', type:'', description:'', animalId:'',}
+      const animals = [...this.state.animals]
+      const newAnimal = {...this.state.newAnimal}
+      newAnimal.animalId = uniqid()
+      animals.unshift(newAnimal)
+      this.setState({animals, newAnimal:resetNewAnimal})
+      event.target.reset()
+   }
+   
+   handleChange = (event) => {
+      const newAnimal = {...this.state.newAnimal}
+      newAnimal[event.target.name] = event.target.value
+      this.setState({newAnimal})
+   }
+   
    
 
    render() {
@@ -161,7 +187,7 @@ export default class Animals extends Component {
                         return (
                            <div key={animalId} className="ui card">
                               <div className="image">
-                                 <img src={`/images/${image}`} className='card-image' alt='...'/>
+                                 <img src={image} className='card-image' alt='...'/>
                               </div>
                               <div className="content">
                                  <div className="header">{name}</div>
@@ -183,7 +209,14 @@ export default class Animals extends Component {
                   </div>
                </div>
             </div>
-            <Sidebar liked={this.state.likes} disliked={this.state.dislikes} deleteFromSide={this.deleteFromSide}/>
+            <Sidebar 
+               liked={this.state.likes} 
+               disliked={this.state.dislikes} 
+               deleteFromSide={this.deleteFromSide}
+               newAnimal={this.state.newAnimal}
+               addAnimal={this.addAnimal}
+               handleChange={this.handleChange}
+               />
          </div>
       )
    }

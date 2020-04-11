@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import AddForm from './AddForm'
 import './Sidebar.css'
 
 export default class Sidebar extends Component {
@@ -29,7 +30,7 @@ export default class Sidebar extends Component {
                return (
                   <div key={animalId} className="ui card" id='card-container' onClick={() => this.props.deleteFromSide(animalId)}>
                      <div className="image">
-                        <img src={`/images/${image}`} className='card-image' alt='...'/>
+                        <img src={image} className='card-image' alt='...'/>
                      </div>
                      <div className="content" id='header-container'>
                         <div className="header">{name}</div>
@@ -37,6 +38,12 @@ export default class Sidebar extends Component {
                   </div>
                )
             })}
+            <hr style={{
+               display:'block',
+               height:'1px',
+               width: '100%',
+               backgroundColor:'lightGrey',
+            }}/>
             <div id='likes-container' readOnly>
                <div className="ui input" style={{width:'30px'}}>
                         <input 
@@ -61,7 +68,7 @@ export default class Sidebar extends Component {
                return (
                   <div key={animalId} className="ui card" id='card-container' onClick={() => this.props.deleteFromSide(animalId)}>
                      <div className="image">
-                        <img src={`/images/${image}`} className='card-image' alt='...'/>
+                        <img src={image} className='card-image' alt='...'/>
                      </div>
                      <div className="content" id='header-container'>
                         <div className="header">{name}</div>
@@ -69,6 +76,17 @@ export default class Sidebar extends Component {
                   </div>
                )
             })}
+            <hr style={{
+               display:'block',
+               height:'1px',
+               width: '100%',
+               backgroundColor:'lightGrey',
+            }}/>
+            <AddForm 
+               newAnimal={this.props.newAnimal}
+               addAnimal={this.props.addAnimal}
+               handleChange={this.props.handleChange}
+            />
          </div>
       )
    }
