@@ -20,9 +20,14 @@
    display: flex;
    flex-wrap: wrap;
    justify-content: center;
+   min-width: 77.5vw;
 }
 
 #animals-container>div{
    margin: 20px
 }
 
+.form{
+   margin-left: 7%;
+   width: 66.6vw;
+}

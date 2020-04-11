@@ -89,13 +89,15 @@ const animals = [
    },
 ]
 
+
 export default class Animals extends Component {
    constructor(){
       super()
       this.state={
          animals,
          likes: [],
-         dislikes: []
+         dislikes: [],
+         search:''
       }
    }
    deleteFromSide = (id) => {
@@ -133,6 +135,10 @@ export default class Animals extends Component {
       this.setState({animals, likes, dislikes})
    }
    
+   searchBar = (event) => {
+      this.setState({search: event.target.value.trim()})
+   }
+   
 
    render() {
       return (
@@ -140,8 +146,18 @@ export default class Animals extends Component {
             <div id='parent-container'>
                <div>
                   <h1 id='title'>Animal Lover</h1>
+                  <form className='ui form'>
+                     <div className="field">
+                        <input 
+                           onChange={this.searchBar} 
+                           type="text" 
+                           placeholder='Search for a type of an animal...'
+                           value={this.state.search}
+                           />
+                     </div>
+                  </form>
                   <div id='animals-container'>
-                     {this.state.animals.map(({image, type, name, description, animalId})=>{
+                     {this.state.animals.filter(animal => animal.type.toLowerCase().includes(this.state.search.toLowerCase())).map(({image, type, name, description, animalId})=>{
                         return (
                            <div key={animalId} className="ui card">
                               <div className="image">
