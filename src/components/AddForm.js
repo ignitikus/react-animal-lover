@@ -1,21 +1,20 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './AddForm.css'
 
-export default class AddForm extends Component {
-   render() {
+export default function AddForm({newAnimal, handleChange, addAnimal}) {
       return (
          <div id='form-container'>
             <form className="ui form" style={{
                marginLeft:0
-            }} onSubmit={this.props.addAnimal}>
+            }} onSubmit={addAnimal}>
                <div className="field">
                   <label>Image URL</label>
                   <input 
                      type="text" 
                      name="image" 
                      placeholder="Image URL" 
-                     value={this.props.newAnimal.image}
-                     onChange={this.props.handleChange}
+                     value={newAnimal.image}
+                     onChange={handleChange}
                      />
                </div>
                <div className="field">
@@ -24,8 +23,8 @@ export default class AddForm extends Component {
                      type="text" 
                      name="name" 
                      placeholder="Name" 
-                     value={this.props.newAnimal.name}
-                     onChange={this.props.handleChange}
+                     value={newAnimal.name}
+                     onChange={handleChange}
                      />
                </div>
                <div className="field">
@@ -34,8 +33,8 @@ export default class AddForm extends Component {
                      type="text" 
                      name="type" 
                      placeholder="Type of animal" 
-                     value={this.props.newAnimal.type}
-                     onChange={this.props.handleChange}
+                     value={newAnimal.type}
+                     onChange={handleChange}
                      />
                </div>
                <div className="field">
@@ -44,13 +43,12 @@ export default class AddForm extends Component {
                      type="text" 
                      name="description" 
                      placeholder="Description" 
-                     value={this.props.newAnimal.description}
-                     onChange={this.props.handleChange}
+                     value={newAnimal.description}
+                     onChange={handleChange}
                      />
                </div>
                <button className="ui button" type="submit">Submit</button>
             </form>
          </div>
       )
-   }
 }
